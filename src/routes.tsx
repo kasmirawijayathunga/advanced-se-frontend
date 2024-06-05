@@ -43,13 +43,6 @@ const RouteList: ExtendedRouteObject[] | undefined = [
                 element: <Shops />,
                 navlink: false,
                 label: "Shops",
-                children: [
-                    {
-                        path: "/shops/:shopId",
-                        element: <Shop />,
-                        navlink: false,
-                    }
-                ]
             }
         ]
     }

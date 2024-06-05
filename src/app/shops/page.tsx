@@ -1,72 +1,99 @@
-import { Search } from '@mui/icons-material'
-import { Box, Button, Container, Divider, FormControl, Grid, IconButton, InputAdornment, InputLabel, List, ListItem, ListItemButton, ListItemText, OutlinedInput, styled } from '@mui/material'
-import React, { FormEvent, useState } from 'react'
-import { Link, Outlet, useParams } from 'react-router-dom';
-import Shop_Default from './[id]/default';
-import useScreenSize from '../../utils/hooks/useScreenSize';
-import useDrawer from '../../utils/hooks/useDrawer';
+import { Box, Container, styled } from '@mui/material'
+import React, { useState } from 'react'
 import AddShop from './add';
+import { DataGrid } from '@mui/x-data-grid';
+import useScreenSize from '../../utils/hooks/useScreenSize';
+import ViewModal from './ViewModal';
 
-const DATA_SHOPS = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
-
-const GridPage = styled(Grid)({
-  maxHeight: `calc(100vh - 84px)`
+const PageBox = styled(Box)({
+  maxHeight: `calc(100vh - 84px)`,
+  overflow: "auto"
 });
 
 function Shops() {
-  let { shopId } = useParams();
-  const [drawer, setDrawer] = useDrawer();
-  const { isSmScreen, isMdScreen, gtMdScreen } = useScreenSize();
+  const { isSmScreen } = useScreenSize();
+  const [data, setData] = useState([
+    { id: 1, shopName: 'Samarasingha Hardware', shopOwnerName: 'Jhon Samarasinghe', shopRoute: "Route 1", shopCategory: "Hardware", foo: "bar" },
+    { id: 2, shopName: 'Smith\'s Grocery', shopOwnerName: 'Emily Smith', shopRoute: "Route 2", shopCategory: "Grocery" },
+    { id: 3, shopName: 'Johnson Electronics', shopOwnerName: 'Michael Johnson', shopRoute: "Route 3", shopCategory: "Electronics" },
+    { id: 4, shopName: 'Green Thumb Nursery', shopOwnerName: 'Sarah Green', shopRoute: "Route 4", shopCategory: "Nursery" },
+    { id: 5, shopName: 'Baker\'s Delight Bakery', shopOwnerName: 'David Baker', shopRoute: "Route 5", shopCategory: "Bakery" },
+    { id: 6, shopName: 'Fresh Fashion Boutique', shopOwnerName: 'Sophia Rodriguez', shopRoute: "Route 6", shopCategory: "Fashion" },
+    { id: 7, shopName: 'Happy Paws Pet Store', shopOwnerName: 'Liam Thompson', shopRoute: "Route 7", shopCategory: "Pet Supplies" },
+    { id: 8, shopName: 'Tech Haven', shopOwnerName: 'Olivia White', shopRoute: "Route 8", shopCategory: "Technology" },
+    { id: 9, shopName: 'Garden Glory', shopOwnerName: 'Ethan Brown', shopRoute: "Route 9", shopCategory: "Gardening" },
+    { id: 10, shopName: 'Books & Beyond', shopOwnerName: 'Ava Martinez', shopRoute: "Route 10", shopCategory: "Books" },
+    { id: 11, shopName: 'Sunny Side Cafe', shopOwnerName: 'Noah Lee', shopRoute: "Route 11", shopCategory: "Cafe" },
+    { id: 12, shopName: 'Healthy Living Pharmacy', shopOwnerName: 'Mia Scott', shopRoute: "Route 12", shopCategory: "Pharmacy" }
+  ]);
+  const [modal_data, setModal_data] = useState<{
+    id: number;
+    shopName: string;
+    shopOwnerName: string;
+    shopRoute: string;
+    shopCategory: string;
+  } | null>(null);
 
-  const handleSearch = (e:FormEvent) => {
-    e.preventDefault();
+  const clearModal = () => setModal_data(null);
+  const handleRowClick = (e:any) => {
+    // console.log(e.row)
+    setModal_data(e.row)
   };
 
   return (
-    <Grid container sx={{ flex: 1 }}>
-      {((isSmScreen && !shopId) || (isMdScreen && (!shopId || (!drawer && shopId))) || gtMdScreen) && (
-        <GridPage item xs={12} sm={drawer ? 12 : 5} md={drawer ? 12 : 4} lg={4} xl={3} sx={{ display: "flex", flexDirection: "column", borderRight: "solid thin", borderRightColor: (theme)=>theme.palette.grey[300] }}>          
-          <AddShop />
-          <Box component="form" onSubmit={handleSearch} sx={{ display: "flex", alignItems: "center", px:3 }}>
-            <FormControl sx={{ m: 1, flex: 1 }} variant="outlined">
-              <InputLabel htmlFor="shop-search-input" sx={{ ml:0.5 }}>Search</InputLabel>
-              <OutlinedInput
-                id="shop-search-input"
-                endAdornment={
-                  <InputAdornment position="end" sx={{ mr: 0.5 }}>
-                    <IconButton
-                      type="submit"
-                      edge="end"
-                    >
-                      <Search />
-                    </IconButton>
-                  </InputAdornment>
-                }
-                sx={{ borderRadius: 10, pl:1 }}
-                label="Search"
-              />
-            </FormControl>
-          </Box>
-          <Box sx={{ flex: 1, overflowY: "auto", mb:1 }}>
-            <List>
-              {DATA_SHOPS.map((shop, index)=>(
-                <Link to={`/shops/${shop}`} key={index}>
-                  <Divider />
-                  <ListItemButton>
-                    <ListItemText primary={`Shop Name ${shop}`} />
-                  </ListItemButton>
-                </Link>
-              ))}
-            </List>
-          </Box>
-        </GridPage>
-      )}
-      {((isSmScreen && shopId) || (isMdScreen && (shopId || (!drawer && !shopId))) || gtMdScreen) && (
-        <Grid item xs={12} sm={drawer ? 12 : 7} md={drawer ? 12 : 8} lg={8} xl={9}>
-          {shopId ? <Outlet /> : <Shop_Default />}
-        </Grid>
-      )}
-    </Grid>
+    <Container>
+      <AddShop />
+      {/* @ts-expect-error */}
+      <ViewModal data={modal_data} clearModal={clearModal} />
+      <PageBox>
+        <DataGrid
+          autosizeOnMount={true}
+          rows={data}
+          columnVisibilityModel={{
+            id: isSmScreen ? false : true,
+            shopOwnerName: isSmScreen ? false : true,
+            shopRoute: isSmScreen ? false : true,
+            shopCategory: isSmScreen ? false : true,
+          }}
+          columns={[
+            {
+              field: 'id',
+              headerName: 'Shop ID',
+              flex: 1
+            },
+            {
+              field: 'shopName',
+              headerName: 'Shop Name',
+              flex: 1
+            },
+            {
+              field: 'shopOwnerName',
+              headerName: 'Owner Name',
+              flex: 1
+            },
+            {
+              field: 'shopRoute',
+              headerName: 'Shop Route',
+              flex: 1
+            },
+            {
+              field: 'shopCategory',
+              headerName: 'Full name',
+              flex: 1
+            },
+          ]}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
+              },
+            },
+          }}
+          pageSizeOptions={[10]}
+          onRowClick={handleRowClick}
+        />
+      </PageBox>
+    </Container>
   )
 }
 

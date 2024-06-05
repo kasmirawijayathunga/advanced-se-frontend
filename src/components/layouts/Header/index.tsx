@@ -11,13 +11,13 @@ import Image_Logo from '../../../assets/logo.png';
 import HeaderMenu from './menu';
 
 interface AppBarProps extends MuiAppBarProps {
-  issmscreen?: boolean;
+  issmscreen: string;
 }
 
 const AppBar = styled(MuiAppBar)<AppBarProps>(({ theme, issmscreen }) => ({
   backgroundColor: theme.palette.background.paper,
   color: theme.palette.text.primary,
-  ...(!issmscreen) && {
+  ...(issmscreen === "false") && {
     zIndex: theme.zIndex.drawer + 1,
   },
 }));
@@ -26,7 +26,7 @@ function Header({ handleToogleDrawer }:{ handleToogleDrawer: () => void }) {
     const { isSmScreen } = useScreenSize();
 
   return (
-    <AppBar position="fixed" issmscreen={isSmScreen??false}>
+    <AppBar position="fixed" issmscreen={isSmScreen.toString()??"false"}>
       <Toolbar>
         {isSmScreen && (
           <IconButton
