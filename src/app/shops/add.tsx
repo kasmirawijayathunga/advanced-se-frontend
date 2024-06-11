@@ -18,7 +18,7 @@ function AddShop() {
                     </Box>
                     <Divider sx={{ my: 2 }} />
                     <Box sx={{ py: 2, px:{ md: 3 } }}>
-                        <ShopForm />
+                        <ShopForm editMode={false} onClose={()=>setOpenDialog(false)} onBack={()=>setOpenDialog(false)} />
                     </Box>
                 </Container>
             </Modal>

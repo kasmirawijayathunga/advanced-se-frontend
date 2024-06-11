@@ -5,7 +5,6 @@ export const initialState = {
     snackbar: "",
     severity: "success",
 
-    roleId: null,
     role: null
 };
 
@@ -31,7 +30,6 @@ const reducer = (state, action) => {
         case actionTypes.SET_ROLE:
             return {
                 ...state,
-                roleId: action.roleId,
                 role: action.role
             };
         default:

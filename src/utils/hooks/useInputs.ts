@@ -8,12 +8,12 @@ import { z } from 'zod';
 // Define an interface for the object structure
 interface InputObject {
   name: string;
-  value: string | null | boolean;
+  value: unknown;
   errormsg?: string;
   schema?: z.ZodType<any>;
 }
 interface InputTypes {
-  [key: string]: string | number | null | boolean;
+  [key: string]: any;
 }
 
 function useInputs(inputTemplate: InputObject[]) {

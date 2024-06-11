@@ -4,6 +4,7 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
+import Auth from '../../../utils/services/Auth';
 
 function HeaderMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -69,14 +70,12 @@ function HeaderMenu() {
             </Link>
             <Divider />
         */}
-        <Link to="/#">
-            <MenuItem>
-                <ListItemIcon>
-                    <Logout fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primary="Logout" />
-            </MenuItem>
-        </Link>
+          <MenuItem onClick={()=>Auth.logout()}>
+              <ListItemIcon>
+                  <Logout fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+          </MenuItem>
       </Menu>
     </>
   )

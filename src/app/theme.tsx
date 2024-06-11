@@ -8,6 +8,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { useMemo } from 'react';
+import { SnackbarProvider } from 'notistack';
 
 
 function Theme({ children, }: { children: React.ReactNode }) {
@@ -26,8 +27,10 @@ function Theme({ children, }: { children: React.ReactNode }) {
 
   return (
     <ThemeProvider theme={theme}>
+      <SnackbarProvider style={{ maxWidth: 450 }} maxSnack={3}>
         <CssBaseline />
         {children}
+      </SnackbarProvider>
     </ThemeProvider>
   )
 }

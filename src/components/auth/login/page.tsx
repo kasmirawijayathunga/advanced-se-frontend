@@ -1,19 +1,42 @@
+import useLoading from '../../../utils/hooks/useLoading';
+import Axios from '../../../utils/services/Axios';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Box, Button, Container, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, styled, TextField, Typography } from '@mui/material'
+import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react'
+import AuthService from '../../../utils/services/Auth';
 
 const PageContiner = styled(Container)({
   maxHeight: `calc(100vh - 64px)`
 });
 
 function AuthLogin() {
+  const [loading, setLoading] = useLoading();
   const [showPassword, setShowPassword] = useState(false);
   const [inputs, setInputs] = useState({
     email: "",
     password: ""
   })
 
-  const handleSubmit = () => { };
+  const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+
+      let { data } = await Axios.post("/auth/login", {
+        email: inputs.email,
+        password: inputs.password
+      })
+
+      AuthService.storeTokens(data);
+      window.location.reload()
+    } catch (err) {
+      console.log(err);
+      return enqueueSnackbar("Unexpected error occoured", { variant: 'warning' });
+  } finally {
+      setLoading(false);
+  }
+  };
 
   return (
     <PageContiner maxWidth="xs" sx={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>

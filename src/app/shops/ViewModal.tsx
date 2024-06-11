@@ -1,20 +1,13 @@
-import { Box, Container, Divider, Modal, Typography, IconButton, Button } from '@mui/material'
+import { Box, Container, Divider, Modal, Typography, IconButton } from '@mui/material'
 import React, { useState } from 'react'
 
 import { Close } from '@mui/icons-material';
 import ViewShop from './view';
 import EditShop from './edit';
-
-type RowData = {
-    id: number;
-    shopName: string;
-    shopOwnerName: string;
-    shopRoute: string;
-    shopCategory: string;
-};
+import { Shop } from '../../config/shop.types';
 
 function ViewModal({ data, clearModal }:{
-    data: RowData
+    data: Shop
     clearModal: () => void;
 }) {
     const [editMode, setEditMode] = useState(false);
