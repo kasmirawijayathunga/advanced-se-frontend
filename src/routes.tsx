@@ -6,10 +6,6 @@ import Shops from './app/shops/page';
 import Layout from './app/layout';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
-import { SvgIconTypeMap } from '@mui/material';
-import { JsxElement } from 'typescript';
-import Shop from './app/shops/[id]/page';
 
 interface ExtendedIndexRouteObject extends IndexRouteObject {
     navlink?: boolean;

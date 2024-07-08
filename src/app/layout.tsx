@@ -17,9 +17,7 @@ function Layout() {
     setDrawer(!drawer);
   };
 
-  if (user === undefined){
-    return null;
-  } else if(user === null){
+  if(user === null){
     return (
       <Box sx={{ display: 'flex' }}>
         <Header
