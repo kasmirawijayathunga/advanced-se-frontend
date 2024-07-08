@@ -9,6 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 //@ts-expect-error
 import Image_Logo from '../../../assets/logo.png';
 import HeaderMenu from './menu';
+import useAuthentication from '../../../utils/hooks/useAuthentication';
 
 interface AppBarProps extends MuiAppBarProps {
   issmscreen: string;
@@ -23,6 +24,7 @@ const AppBar = styled(MuiAppBar)<AppBarProps>(({ theme, issmscreen }) => ({
 }));
 
 function Header({ handleToogleDrawer }:{ handleToogleDrawer: () => void }) {
+  const user = useAuthentication()
     const { isSmScreen } = useScreenSize();
 
   return (
@@ -43,7 +45,7 @@ function Header({ handleToogleDrawer }:{ handleToogleDrawer: () => void }) {
             <Typography variant="h6" sx={{ ml: 1, fontWeight: "bold" }}>LightWave</Typography>
           </Box>
           <Box>
-            <HeaderMenu />
+            {user && (<HeaderMenu />)}
           </Box>
         </Box>
       </Toolbar>

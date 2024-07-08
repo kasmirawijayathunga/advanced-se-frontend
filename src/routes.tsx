@@ -24,14 +24,14 @@ type ExtendedRouteObject = ExtendedIndexRouteObject | ExtendedNonIndexRouteObjec
 const RouteList: ExtendedRouteObject[] | undefined = [
     {
         element: <Layout />,
+        errorElement: <ErrorPage errorCode="404" />,
         children: [
             {
                 path: "/",
                 element: <Dashboard />,
                 icon: <DashboardIcon />,
                 navlink: true,
-                label: "Dashboard",
-                errorElement: <ErrorPage errorCode="404" />
+                label: "Dashboard"
             },
             {
                 path: "/shops",

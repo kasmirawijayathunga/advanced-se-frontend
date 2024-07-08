@@ -5,7 +5,7 @@ const logout = () => {
     localStorage.removeItem(`${LOCAL_PRIFIX}_refresh`);
     sessionStorage.removeItem(`${LOCAL_PRIFIX}_access`);
     window.location.reload();
-}
+};
 
 const storeTokens = async (data:{ result: { refresh: {} } }) => {
     sessionStorage.setItem(`${LOCAL_PRIFIX}_access`, JSON.stringify(data.result));
@@ -23,6 +23,7 @@ const getAccessToken = async () => {
 const refresh = async () => {
     try {
         const localDb = localStorage.getItem(`${LOCAL_PRIFIX}_refresh`);
+        console.log(localDb);
         if(localDb) {
             const JSONlocalDb = JSON.parse(localDb);
             if(new Date(JSONlocalDb.expire).getTime() >= Date.now()){
@@ -40,9 +41,11 @@ const refresh = async () => {
     }
 };
 
-export default {
+const Auth = {
     logout,
     getAccessToken,
     storeTokens,
     refresh
 }
+
+export default Auth

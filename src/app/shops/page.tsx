@@ -21,12 +21,14 @@ function Shops() {
   
   const fetchData = async () => {
     const accessToken = await Auth.getAccessToken();
-    const response = await Axios.get("/shops",{
-      headers: {
-          Authorization: "Bearer " + accessToken
-      }
-    })
-    setData_shops(response.data.result)
+    if(accessToken){
+      const response = await Axios.get("/shops",{
+        headers: {
+            Authorization: "Bearer " + accessToken
+        }
+      })
+      setData_shops(response.data.result)
+    }
   };
   useEffect(()=>{
     fetchData()

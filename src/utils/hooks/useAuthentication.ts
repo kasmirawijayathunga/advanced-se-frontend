@@ -38,11 +38,8 @@ export default function useAuthentication() {
   };
 
   useEffect(() => {
-    return unsubscribeFromAuthStatuChanged
+    unsubscribeFromAuthStatuChanged();
   }, []);
-
-  useEffect(()=>{
-  },[localUser])
 
   return localUser;
 }
