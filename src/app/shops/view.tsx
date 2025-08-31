@@ -11,9 +11,8 @@ import Axios from '../../utils/services/Axios';
 import { enqueueSnackbar } from 'notistack';
 import useLoading from '../../utils/hooks/useLoading';
 import Auth from '../../utils/services/Auth';
-import { AxiosError } from 'axios';
 import useAuthentication from '../../utils/hooks/useAuthentication';
-import { BACKEND, BACKEND_URL } from '../../config';
+import {  BACKEND_URL } from '../../config';
 
 function ViewShop({ data, clearModal, toogleEditMode }:{ data: Shop, clearModal: () => void, toogleEditMode: () => void }) {
     const user = useAuthentication()
@@ -22,7 +21,7 @@ function ViewShop({ data, clearModal, toogleEditMode }:{ data: Shop, clearModal:
     const handleDelete = async () => {
         try{
             const accessToken = await Auth.getAccessToken();
-            const response = await Axios.delete(`/shops/${data.id}`,{
+            await Axios.delete(`/shops/${data.id}`,{
                 headers: {
                     Authorization: "Bearer " + accessToken
                 }

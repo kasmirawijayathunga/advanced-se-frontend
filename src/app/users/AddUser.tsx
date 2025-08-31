@@ -1,10 +1,8 @@
 import { Add } from '@mui/icons-material';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select, TextField } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select, TextField } from '@mui/material'
+import { useState } from 'react'
 import useInputs from '../../utils/hooks/useInputs';
 import { z } from 'zod';
-import Axios from '../../utils/services/Axios';
-import Auth from '../../utils/services/Auth';
 
 const InputTemplate = [
     {

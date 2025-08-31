@@ -1,5 +1,4 @@
-import { Box, Button, Container, Divider, Modal, Typography } from '@mui/material';
-import React from 'react'
+import { Box, Typography } from '@mui/material';
 import ShopForm from './form';
 import { Shop } from '../../config/shop.types';
 
