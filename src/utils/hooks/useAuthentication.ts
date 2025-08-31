@@ -21,7 +21,7 @@ interface AuthUser {
 export default function useAuthentication() {
   const [localUser, setLocalUser] = useState<AuthUser | null | undefined>(undefined);
 
-  const unsubscribeFromAuthStatuChanged = () => {
+  const unsubscribeFromAuthStatusChanged = () => {
     const sessionData = sessionStorage.getItem(`${LOCAL_PRIFIX}_access`);
     if (sessionData) {
       let userdata = JSON.parse(sessionData);
@@ -38,7 +38,7 @@ export default function useAuthentication() {
   };
 
   useEffect(() => {
-    unsubscribeFromAuthStatuChanged();
+    unsubscribeFromAuthStatusChanged();
   }, []);
 
   return localUser;

@@ -13,7 +13,7 @@ import useLoading from '../../utils/hooks/useLoading';
 import Auth from '../../utils/services/Auth';
 import { AxiosError } from 'axios';
 import useAuthentication from '../../utils/hooks/useAuthentication';
-import { BACKEND } from '../../config';
+import { BACKEND, BACKEND_URL } from '../../config';
 
 function ViewShop({ data, clearModal, toogleEditMode }:{ data: Shop, clearModal: () => void, toogleEditMode: () => void }) {
     const user = useAuthentication()
@@ -130,27 +130,27 @@ function ViewShop({ data, clearModal, toogleEditMode }:{ data: Shop, clearModal:
             <Grid container item xs={12}>
                 {data?.Shops_Images?.img1 && (
                     <Grid item xs={6} sm={4} lg={12/5} sx={{ position: "relative" }}>
-                        <img src={`${BACKEND}/static/uploads/${data.Shops_Images.img1}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                        <img src={`${BACKEND_URL}/shops/static/uploads/${data.Shops_Images.img1}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                     </Grid>
                 )}
                 {data?.Shops_Images?.img2 && (
                     <Grid item xs={6} sm={4} lg={12/5} sx={{ position: "relative" }}>
-                        <img src={`${BACKEND}/static/uploads/${data.Shops_Images.img2}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                        <img src={`${BACKEND_URL}/shops/static/uploads/${data.Shops_Images.img2}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                     </Grid>
                 )}
                 {data?.Shops_Images?.img3 && (
                     <Grid item xs={6} sm={4} lg={12/5} sx={{ position: "relative" }}>
-                        <img src={`${BACKEND}/static/uploads/${data.Shops_Images.img3}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                        <img src={`${BACKEND_URL}/shops/static/uploads/${data.Shops_Images.img3}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                     </Grid>
                 )}
                 {data?.Shops_Images?.img4 && (
                     <Grid item xs={6} sm={4} lg={12/5} sx={{ position: "relative" }}>
-                        <img src={`${BACKEND}/static/uploads/${data.Shops_Images.img4}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                        <img src={`${BACKEND_URL}/shops/static/uploads/${data.Shops_Images.img4}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                     </Grid>
                 )}
                 {data?.Shops_Images?.img5 && (
                     <Grid item xs={6} sm={4} lg={12/5} sx={{ position: "relative" }}>
-                        <img src={`${BACKEND}/static/uploads/${data.Shops_Images.img5}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                        <img src={`${BACKEND_URL}/shops/static/uploads/${data.Shops_Images.img5}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                     </Grid>
                 )}
             </Grid>

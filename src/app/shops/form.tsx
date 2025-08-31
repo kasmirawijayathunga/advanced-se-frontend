@@ -12,7 +12,7 @@ import { z } from 'zod';
 import useLoading from '../../utils/hooks/useLoading';
 import { enqueueSnackbar } from 'notistack';
 import Auth from '../../utils/services/Auth';
-import { BACKEND, MIN_LOCATION_ACCURACY } from '../../config';
+import { BACKEND_URL, MIN_LOCATION_ACCURACY } from '../../config';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CreateForm from '../../utils/services/CreateForm';
 
@@ -144,7 +144,7 @@ function ShopForm({ editMode, data, onClose, onBack }:{ editMode: boolean, data?
 
     const fetchConsts = async () => {
         const accessToken = await Auth.getAccessToken();
-        const response = await Axios.get("/data-shop",{
+        const response = await Axios.get("/shops/data",{
             headers: {
                 Authorization: "Bearer " + accessToken
             }
@@ -490,7 +490,7 @@ function ShopForm({ editMode, data, onClose, onBack }:{ editMode: boolean, data?
                         {(input_file1 || (editMode && inputs?.img1)) ? (
                             <Box sx={{ flex:1, position: "relative" }}>
                                 <IconButton size="small" onClick={()=>handleRemoveImage(1)} sx={{ position: "absolute", right: 2, top: 2,backgroundColor: "#ffffff66" }}><Close fontSize="small" /></IconButton>
-                                <img src={input_file1 ? URL.createObjectURL(input_file1!) : `${BACKEND}/static/uploads/${inputs.img1}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                                <img src={input_file1 ? URL.createObjectURL(input_file1!) : `${BACKEND_URL}/shops/static/uploads/${inputs.img1}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                             </Box>
                         ):(
                             <ButtonBase component="label" sx={{ flexDirection: "column", backgroundColor: (theme)=>theme.palette.grey[300], flex: 1, alignItems: "center", justifyContent: "center", height: 100 }}>
@@ -504,7 +504,7 @@ function ShopForm({ editMode, data, onClose, onBack }:{ editMode: boolean, data?
                         {(input_file2 || (editMode && inputs?.img2)) ? (
                             <Box sx={{ flex:1, position: "relative" }}>
                                 <IconButton size="small" onClick={()=>handleRemoveImage(2)} sx={{ position: "absolute", right: 2, top: 2,backgroundColor: "#ffffff66" }}><Close fontSize="small" /></IconButton>
-                                <img src={input_file2 ? URL.createObjectURL(input_file2!) : `${BACKEND}/static/uploads/${inputs.img2}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                                <img src={input_file2 ? URL.createObjectURL(input_file2!) : `${BACKEND_URL}/shops/static/uploads/${inputs.img2}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                             </Box>
                         ):(
                             <ButtonBase component="label" sx={{ flexDirection: "column", backgroundColor: (theme)=>theme.palette.grey[300], flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -518,7 +518,7 @@ function ShopForm({ editMode, data, onClose, onBack }:{ editMode: boolean, data?
                         {(input_file3 || (editMode && inputs?.img3)) ? (
                             <Box sx={{ flex:1, position: "relative" }}>
                                 <IconButton size="small" onClick={()=>handleRemoveImage(3)} sx={{ position: "absolute", right: 2, top: 2,backgroundColor: "#ffffff66" }}><Close fontSize="small" /></IconButton>
-                                <img src={input_file3 ? URL.createObjectURL(input_file3!) : `${BACKEND}/static/uploads/${inputs.img3}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                                <img src={input_file3 ? URL.createObjectURL(input_file3!) : `${BACKEND_URL}/shops/static/uploads/${inputs.img3}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                             </Box>
                         ):(
                             <ButtonBase component="label" sx={{ flexDirection: "column", backgroundColor: (theme)=>theme.palette.grey[300], flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -532,7 +532,7 @@ function ShopForm({ editMode, data, onClose, onBack }:{ editMode: boolean, data?
                         {(input_file4 || (editMode && inputs?.img4)) ? (
                             <Box sx={{ flex:1, position: "relative" }}>
                                 <IconButton size="small" onClick={()=>handleRemoveImage(4)} sx={{ position: "absolute", right: 2, top: 2,backgroundColor: "#ffffff66" }}><Close fontSize="small" /></IconButton>
-                                <img src={input_file4 ? URL.createObjectURL(input_file4!) : `${BACKEND}/static/uploads/${inputs.img4}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                                <img src={input_file4 ? URL.createObjectURL(input_file4!) : `${BACKEND_URL}/shops/static/uploads/${inputs.img4}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                             </Box>
                         ):(
                             <ButtonBase component="label" sx={{ flexDirection: "column", backgroundColor: (theme)=>theme.palette.grey[300], flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -546,7 +546,7 @@ function ShopForm({ editMode, data, onClose, onBack }:{ editMode: boolean, data?
                         {(input_file5 || (editMode && inputs?.img5)) ? (
                             <Box sx={{ flex:1, position: "relative" }}>
                                 <IconButton size="small" onClick={()=>handleRemoveImage(5)} sx={{ position: "absolute", right: 2, top: 2,backgroundColor: "#ffffff66" }}><Close fontSize="small" /></IconButton>
-                                <img src={input_file5 ? URL.createObjectURL(input_file5!) : `${BACKEND}/static/uploads/${inputs.img5}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                                <img src={input_file5 ? URL.createObjectURL(input_file5!) : `${BACKEND_URL}/shops/static/uploads/${inputs.img5}`} alt="" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                             </Box>
                         ):(
                             <ButtonBase component="label" sx={{ flexDirection: "column", backgroundColor: (theme)=>theme.palette.grey[300], flex: 1, alignItems: "center", justifyContent: "center" }}>
