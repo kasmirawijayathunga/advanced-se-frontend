@@ -1,54 +1,53 @@
-import { Box, Container, Divider, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Box, Container, Divider, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import AddUser from './AddUser';
+import AddCustomer from './AddCustomer';
 import Auth from '../../utils/services/Auth';
 import Axios from '../../utils/services/Axios';
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Edit } from '@mui/icons-material'
+import moment from 'moment';
 
-function Users() {
-    const [data, setData] = useState<{ uid: string; name: string; email: string; User_Role: { id: string; label: string } }[]>([]);
+function Customers() {
+    const [data, setData] = useState<{ id: string; name: string; createdAt: string }[]>([]);
 
     const fetchData = async () => {
         const accessToken = await Auth.getAccessToken();
-        const response = await Axios.get("/data/users",{
+        const response = await Axios.get("/data/customers", {
             headers: {
                 Authorization: "Bearer " + accessToken
             }
-        })
+        });
         setData(response.data?.result);
     };
 
-    useEffect(()=>{
-        fetchData()
-    },[])
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
         <Container maxWidth="xl">
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <Typography variant="h4" sx={{ my: 3, fontWeight: 600 }}>Users</Typography>
-                <AddUser />
+                <Typography variant="h4" sx={{ my: 3, fontWeight: 600 }}>Customers</Typography>
+                <AddCustomer />
             </Box>
             <Divider sx={{ mb: 2 }} />
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ minWidth: 650 }} aria-label="customers table">
                 <TableHead>
                     <TableRow>
                         <TableCell>#</TableCell>
                         <TableCell>Name</TableCell>
-                        <TableCell>Email</TableCell>
-                        <TableCell>Role</TableCell>
+                        <TableCell>createdAt</TableCell>
                         <TableCell align="right">Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 {data && data.length > 0 ? (
                     <TableBody>
-                        {data.map((user, index) => (
-                            <TableRow key={user.uid}>
+                        {data.map((customer, index) => (
+                            <TableRow key={customer.id}>
                                 <TableCell>{index + 1}</TableCell>
-                                <TableCell>{user.name}</TableCell>
-                                <TableCell>{user.email}</TableCell>
-                                <TableCell>{user.User_Role.label}</TableCell>
+                                <TableCell>{customer.name}</TableCell>
+                                <TableCell>{moment(customer.createdAt).format("MMMM Do YYYY, h:mm:ss a")}</TableCell>
                                 <TableCell align="right">
                                     <IconButton>
                                         <Edit />
@@ -69,7 +68,7 @@ function Users() {
                 )}
             </Table>
         </Container>
-    )
+    );
 }
 
-export default Users
+export default Customers;

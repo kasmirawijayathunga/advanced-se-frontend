@@ -1,8 +1,10 @@
 import { Add } from '@mui/icons-material';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, Grid, InputLabel, OutlinedInput, TextField } from '@mui/material'
-import { useState } from 'react'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select, TextField } from '@mui/material'
+import { useEffect, useState } from 'react'
 import useInputs from '../../utils/hooks/useInputs';
 import { z } from 'zod';
+import Axios from '../../utils/services/Axios';
+import Auth from '../../utils/services/Auth';
 
 const InputTemplate = [
     {
@@ -28,8 +30,9 @@ const InputTemplate = [
 ]
 
 function AddUser() {
-    const [inputs, { handleInput, validateInputs, handleManualInput, handleSelect }] = useInputs(InputTemplate);
     const [open, setOpen] = useState(false);
+    const [inputs, { handleInput }] = useInputs(InputTemplate);
+    const [selectedRole, setSelectedRole] = useState<string | undefined>();
 
     const handleAddUser = () => {
 
@@ -55,6 +58,8 @@ function AddUser() {
                                 type="email"
                                 fullWidth
                                 variant="outlined"
+                                value={inputs.email}
+                                onChange={handleInput}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -67,6 +72,8 @@ function AddUser() {
                                 type="text"
                                 fullWidth
                                 variant="outlined"
+                                value={inputs.name}
+                                onChange={handleInput}
                             />
                         </Grid>
                         <Grid item xs={12} lg={6}>
@@ -91,6 +98,15 @@ function AddUser() {
                                     value={inputs.cpassword}
                                     onChange={handleInput}
                                 />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} lg={6}>
+                            <FormControl sx={{ width: 300, mt: 1 }}>
+                                <InputLabel id="label">Role</InputLabel>
+                                <Select label="Role" value={selectedRole} onChange={(e)=>setSelectedRole(e.target.value)}>
+                                    <MenuItem value="1">Admin</MenuItem>
+                                    <MenuItem value="2">User</MenuItem>
+                                </Select>
                             </FormControl>
                         </Grid>
                     </Grid>

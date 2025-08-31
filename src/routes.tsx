@@ -6,9 +6,15 @@ import Shops from './app/shops/page';
 import Layout from './app/layout';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import PersonIcon from '@mui/icons-material/Person';
+import RouteIcon from '@mui/icons-material/Route';
+import GroupsIcon from '@mui/icons-material/Groups';
+
 import Routes from './app/routes/page';
 import ShopTypes from './app/shoptypes/page';
 import Users from './app/users/page';
+import Customers from './app/customers/page';
 
 interface ExtendedIndexRouteObject extends IndexRouteObject {
     navlink?: boolean;
@@ -47,21 +53,32 @@ const RouteList: ExtendedRouteObject[] | undefined = [
                 path: "/routes",
                 loader: () => ({ title: "Routes" }),
                 element: <Routes />,
-                navlink: false,
+                icon: <RouteIcon />,
+                navlink: true,
                 label: "Routes",
             },
             {
                 path: "/shoptypes",
                 loader: () => ({ title: "Shop Types" }),
                 element: <ShopTypes />,
-                navlink: false,
+                icon: <StorefrontIcon />,
+                navlink: true,
                 label: "Shop Types",
+            },
+            {
+                path: "/customers",
+                loader: () => ({ title: "Customers" }),
+                element: <Customers />,
+                icon: <GroupsIcon />,
+                navlink: true,
+                label: "Customers",
             },
             {
                 path: "/users",
                 loader: () => ({ title: "Users" }),
                 element: <Users />,
-                navlink: false,
+                icon: <PersonIcon />,
+                navlink: true,
                 label: "Users",
             },
         ]
