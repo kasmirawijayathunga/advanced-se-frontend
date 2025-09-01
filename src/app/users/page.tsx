@@ -1,14 +1,14 @@
-import { Box, Container, Divider, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Box, Container, Divider, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import { useEffect, useState } from 'react';
 import AddUser from './AddUser';
 import Auth from '../../utils/services/Auth';
 import Axios from '../../utils/services/Axios';
 
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Edit } from '@mui/icons-material'
+import EditUser from './EditUser';
+import DeleteUser from './DeleteUser';
 
 function Users() {
-    const [data, setData] = useState<{ uid: string; name: string; email: string; User_Role: { id: string; label: string } }[]>([]);
+    const [data, setData] = useState<{ id: string; name: string; email: string; User_Role: { id: string; label: string } }[]>([]);
 
     const fetchData = async () => {
         const accessToken = await Auth.getAccessToken();
@@ -28,7 +28,7 @@ function Users() {
         <Container maxWidth="xl">
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Typography variant="h4" sx={{ my: 3, fontWeight: 600 }}>Users</Typography>
-                <AddUser />
+                <AddUser onUpdated={fetchData} />
             </Box>
             <Divider sx={{ mb: 2 }} />
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -44,18 +44,14 @@ function Users() {
                 {data && data.length > 0 ? (
                     <TableBody>
                         {data.map((user, index) => (
-                            <TableRow key={user.uid}>
+                            <TableRow key={user.id}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>{user.name}</TableCell>
                                 <TableCell>{user.email}</TableCell>
                                 <TableCell>{user.User_Role.label}</TableCell>
                                 <TableCell align="right">
-                                    <IconButton>
-                                        <Edit />
-                                    </IconButton>
-                                    <IconButton color="error">
-                                        <DeleteIcon />
-                                    </IconButton>
+                                    <EditUser user={user} onUpdated={fetchData} />
+                                    <DeleteUser userId={user.id} onDeleted={fetchData} />
                                 </TableCell>
                             </TableRow>
                         ))}

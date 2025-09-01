@@ -7,6 +7,8 @@ import Axios from '../../utils/services/Axios';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Edit } from '@mui/icons-material'
 import moment from 'moment';
+import EditCustomers from './EditCustomers';
+import DeleteCustomers from './DeleteCustomers';
 
 function Customers() {
     const [data, setData] = useState<{ id: string; name: string; createdAt: string }[]>([]);
@@ -29,7 +31,7 @@ function Customers() {
         <Container maxWidth="xl">
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Typography variant="h4" sx={{ my: 3, fontWeight: 600 }}>Customers</Typography>
-                <AddCustomer />
+                <AddCustomer onUpdated={fetchData} />
             </Box>
             <Divider sx={{ mb: 2 }} />
             <Table sx={{ minWidth: 650 }} aria-label="customers table">
@@ -49,12 +51,8 @@ function Customers() {
                                 <TableCell>{customer.name}</TableCell>
                                 <TableCell>{moment(customer.createdAt).format("MMMM Do YYYY, h:mm:ss a")}</TableCell>
                                 <TableCell align="right">
-                                    <IconButton>
-                                        <Edit />
-                                    </IconButton>
-                                    <IconButton color="error">
-                                        <DeleteIcon />
-                                    </IconButton>
+                                    <EditCustomers customer={customer} onUpdated={fetchData} />
+                                    <DeleteCustomers customerId={customer.id} onDeleted={fetchData} />
                                 </TableCell>
                             </TableRow>
                         ))}

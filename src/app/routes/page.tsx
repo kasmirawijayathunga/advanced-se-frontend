@@ -7,6 +7,8 @@ import Axios from '../../utils/services/Axios';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Edit } from '@mui/icons-material'
 import moment from 'moment';
+import EditRoutes from './EditRoutes';
+import DeleteRoutes from './DeleteRoutes';
 
 function Routes() {
     const [data, setData] = useState<{ id: string; label: string; createdAt: string }[]>([]);
@@ -29,7 +31,7 @@ function Routes() {
         <Container maxWidth="xl">
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Typography variant="h4" sx={{ my: 3, fontWeight: 600 }}>Routes</Typography>
-                <AddRoute />
+                <AddRoute onUpdated={fetchData} />
             </Box>
             <Divider sx={{ mb: 2 }} />
             <Table sx={{ minWidth: 650 }} aria-label="routes table">
@@ -49,12 +51,8 @@ function Routes() {
                                 <TableCell>{route.label}</TableCell>
                                 <TableCell>{moment(route.createdAt).format("MMMM Do YYYY, h:mm:ss a")}</TableCell>
                                 <TableCell align="right">
-                                    <IconButton>
-                                        <Edit />
-                                    </IconButton>
-                                    <IconButton color="error">
-                                        <DeleteIcon />
-                                    </IconButton>
+                                    <EditRoutes route={route} onUpdated={fetchData} />
+                                    <DeleteRoutes routeId={route.id} onDeleted={fetchData} />
                                 </TableCell>
                             </TableRow>
                         ))}
