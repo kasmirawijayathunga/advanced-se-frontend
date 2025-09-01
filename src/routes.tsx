@@ -10,6 +10,7 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import PersonIcon from '@mui/icons-material/Person';
 import RouteIcon from '@mui/icons-material/Route';
 import GroupsIcon from '@mui/icons-material/Groups';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 
 import Routes from './app/routes/page';
 import ShopTypes from './app/shoptypes/page';
@@ -45,8 +46,9 @@ const RouteList: ExtendedRouteObject[] | undefined = [
             {
                 path: "/shops",
                 loader: () => ({ title: "Shops" }),
+                icon: <AddBusinessIcon />,
                 element: <Shops />,
-                navlink: false,
+                navlink: true,
                 label: "Shops",
             },
             {
